@@ -998,32 +998,9 @@ embedded default key recovered from `aes.bin`.
 
 ------------------------------------------------------------------------
 
-# 33. Suggested Reproduction Workflow
-
-For a complete independent reproduction:
-
-1.  Load `base.bin` and `aes.bin` into Ghidra as ARM/Thumb firmware.
-2.  Set the image base to `0x08000000`.
-3.  Inspect the vector table at `0x08004000`.
-4.  Set the reset handlers to:
-    -   `0x0800527C` for `base.bin`;
-    -   `0x08005580` for `aes.bin`.
-5.  Recover the command dispatch table around `0x2000001C`.
-6.  Trace the AES `k` handler.
-7.  Follow the key into `0x0800533C`.
-8.  Trace the encryption command `p`.
-9.  Trace `s` and `f`.
-10. Extract the key from `aes.bin+0x563F`.
-11. Verify the AES S-box and Rcon.
-12. Run the FIPS-197 known-answer test.
-13. Compare baseline and AES execution traces.
-
-This workflow provides both static and dynamic confirmation of the
-analysis.
-
 ------------------------------------------------------------------------
 
-# 34. Final Answer / Key Finding
+# 33. Final Answer / Key Finding
 
 **Baseline:**
 
